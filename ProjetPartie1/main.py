@@ -104,14 +104,33 @@ class AB:
             return False
         return True
 
+    def rotationGauche(self):
+        if self.getDroite() != None:
+            self.setRacine(self.getDroite().getRacine())
+            self.setDroite(self.getDroite().getDroite())
+            self.setGauche(AB(self.getRacine(), self.getGauche(), self.getDroite().getGauche()))
+            self.getDroite().setGauche(self.getDroite().getDroite())
+            self.getDroite().setDroite(None)
+            return self
+
+
+    def rotationDroite(self):
+        if self.getGauche() != None:
+            self.setRacine(self.getGauche().getRacine())
+            self.setGauche(self.getGauche().getGauche())
+            self.setDroite(AB(self.getRacine(), self.getGauche().getDroite(), self.getDroite()))
+            self.getGauche().setDroite(self.getGauche().getGauche())
+            self.getGauche().setGauche(None)
+            return self
+
 
 # exercice 3
 A1 = AB()
-print(A1.estVide())  # Doit retourner True
+print(A1.estVide())  # True
 
 # exercice 4
 A2 = AB(5)
-print(A2.estVide())  # Doit retourner False
+print(A2.estVide())  # False
 
 # exercice 5
 A3 = AB(3)
@@ -129,33 +148,38 @@ A3 = AB(5)
 # Atest = AB(10, AB(A1), AB(A2))
 Atest = AB(10, AB(5, AB(3), AB(8)), AB(12))
 
-print(Atest.estVide())  # Doit retourner False
+print(Atest.estVide())  # False
 
 # exercice 8
-# Utilisation de l'arbre Atest créé précédemment
-print(Atest.taille())  # Doit retourner 5
+print(Atest.taille())  # 5
 
 # exercice 9
-print(Atest.taille())  # Doit retourner 5
+print(Atest.taille())  #5
 
-# exercice 10
+
 # La méthode taille() est déjà codée en récursif dans la classe AB.
 
 
 # exercice 11
 # Utilisation de l'arbre Atest créé précédemment
-print(Atest.prefixe())  # Doit afficher : "10 5 3 8 12"
+print(Atest.prefixe(), "\n")  # Doit afficher : "10 5 3 8 12"
 
 # exercice 13
 # Test des deux autres parcours
-print(Atest.postfixe())  # Doit afficher : "3 8 5 12 10"
-print(Atest.infixe())  # affichera : 3 5 8 10 12
+print(Atest.postfixe(), "\n")  # Doit afficher : "3 8 5 12 10"
+print(Atest.infixe(), "\n")  # affichera : 3 5 8 10 12
 
 # exercice 14
-print(Atest.hauteur())  # Imprime 2
+print(Atest.hauteur(), "\n")  # Imprime 2
 
 # exercice 15
-print(Atest.estABR())  # Imprime True o False
+print(Atest.estABR(), "\n")  # Imprime True o False
 
 # exercice 16
-print(Atest.estEquilibre())  # Imprime True o False
+print(Atest.estEquilibre(), "\n")  # Imprime True o False
+
+
+#Rotations
+
+print( "Rotation Droite \n" , Atest.rotationDroite(), "\n")
+print("Rotation Gauche \n" , Atest.rotationGauche(), "\n")
